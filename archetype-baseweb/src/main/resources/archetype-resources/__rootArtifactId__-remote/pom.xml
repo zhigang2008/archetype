@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>${groupId}</groupId>
+    <artifactId>${rootArtifactId}-parent</artifactId>
+    <version>${version}</version>
+  </parent>
+  <artifactId>${rootArtifactId}-remote</artifactId>
+  <name>${rootArtifactId}-remote</name>
+  <description>远程接口访问层模块</description>
+  <dependencies>
+     <dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+	 </dependency>
+     <dependency>
+			<groupId>com.github.sgroschupf</groupId>
+			<artifactId>zkclient</artifactId>
+	 </dependency>
+  </dependencies>
+   <build>
+    <plugins>
+  		<plugin>
+			<groupId>com.alibaba.citrus.tool</groupId>
+			<artifactId>autoconfig-maven-plugin</artifactId>
+			<version>1.2</version>
+			<executions>
+				<execution>
+					<id>compile</id>
+					<phase>compile</phase>
+					<goals>
+						<goal>autoconfig</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+    </plugins>
+  </build>
+</project>

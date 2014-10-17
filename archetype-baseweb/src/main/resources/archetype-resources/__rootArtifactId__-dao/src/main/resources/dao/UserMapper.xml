@@ -1,0 +1,73 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${package}.dao.UserMapper">
+
+  <cache />
+
+  <sql id="baseColumnList" >
+    USERID, USERNAME, GENDER, AGE
+  </sql>
+  
+  <select id="listAll"  resultType="User">
+    SELECT
+       <include refid="baseColumnList" />
+    FROM TEST_USER
+  </select>
+  <select id="pageList"   resultType="User">
+    SELECT
+         <include refid="baseColumnList" />
+    FROM TEST_USER
+    <where>
+      <if test="userId != null and userId!='' ">
+        USERID = ${symbol_pound}{userId}
+      </if>
+      <if test="userName != null and userName != '' ">
+        AND USERNAME LIKE '%'|| ${symbol_pound}{userName} || '%'
+      </if>
+      <if test="gender != null and gender != '' ">
+        AND GENDER = ${symbol_pound}{gender}
+      </if>
+      <if test="age >= 0 ">
+        AND AGE = ${symbol_pound}{age}
+      </if>
+    </where>
+  </select>
+  <select id="getUserById" parameterType="string" resultType="User">
+    SELECT
+          <include refid="baseColumnList" />
+    FROM TEST_USER
+    WHERE USERID = ${symbol_pound}{userId}
+  </select>
+  <insert id="save"  parameterType="User">
+    INSERT INTO TEST_USER(
+          USERID,
+          USERNAME,
+          GENDER,
+          AGE
+          ) 
+     VALUES(
+         ${symbol_pound}{userId,jdbcType=VARCHAR},
+         ${symbol_pound}{userName,jdbcType=VARCHAR},
+         ${symbol_pound}{gender,jdbcType=VARCHAR},
+         ${symbol_pound}{age,jdbcType=DECIMAL}
+     )
+  </insert>
+  <update id="update" parameterType="User">
+     UPDATE TEST_USER
+     SET
+         USERNAME=${symbol_pound}{userName,jdbcType=VARCHAR},
+         AGE=${symbol_pound}{age,jdbcType=DECIMAL},
+         GENDER=${symbol_pound}{gender,jdbcType=VARCHAR}
+     WHERE
+         USERID=${symbol_pound}{userId}
+  </update>
+  <delete id="deleteById" parameterType="String">
+     DELETE FROM TEST_USER
+     WHERE USERID=${symbol_pound}{userId}
+  </delete>
+</mapper>

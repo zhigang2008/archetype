@@ -1,0 +1,169 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+${symbol_pound}set(${symbol_dollar}page_title="用户列表样例 - ${appName}")
+<div class="alert alert-warning" role="alert">
+  本样例采用了传统的URL样式,restful方式请自行参照Spring MVC用户手册
+</div>
+<!--查询参数-->
+<div class="panel panel-success">
+  <div class="panel-heading" id="div-query-head">筛选<span></span> </div>
+  <div class="panel-body" id="div-query-body">
+   <form id="queryForm" name="queryForm" method="post" action="list.htm" class="form-inline" role="form">
+    <div class="form-group">
+      <label class="control-label" for="userId">ID:</label>
+      <input type="text" class="form-control" id="userId" name="userId" value="${symbol_dollar}!params.userId" >
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="userName">姓名:</label>
+      <input type="text" class="form-control" id="userName" name="userName" value="${symbol_dollar}!params.userName" >
+    </div>
+    <!--
+    <div class="form-group">
+      <label class="control-label" for="age">年龄:</label>
+      <input type="text" class="form-control" id="age" name="age" value="${symbol_dollar}params.age" >
+    </div>
+    -->
+    <div class="form-group">
+      <label class="control-label" for="gender">性别:</label>
+      <select id="gender" name="gender" class="form-control">
+        <option value=""> -- </option>
+        <option value="M" ${symbol_pound}if(${symbol_dollar}params.gender=="M") selected ${symbol_pound}end>男</option>
+        <option value="F" ${symbol_pound}if(${symbol_dollar}params.gender=="F") selected ${symbol_pound}end>女</option>
+      </select>
+    </div>
+    <div class="form-group col-md-offset-1">
+     <button type="submit" class="btn btn-success btn-sm" >查 询</button>
+    </div>
+</form>
+   </form>
+  </div>
+</div>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-10">样例列表</div>
+      <div class="col-md-2 text-right"><a href="${symbol_dollar}{link.getContextPath()}/user/add.htm" class="btn btn-primary btn-sm "><span class="glyphicon glyphicon-plus-sign"> </span>添加</a></div>
+    </div>
+  </div>
+  <div class="panel-body">
+      
+   <table class="table table-hover">
+    <tr>
+      <th>ID</th>
+      <th>姓名</th>
+      <th>性别</th>
+      <th>年龄</th>
+      <th>操作</th>
+    </tr>
+    ${symbol_pound}foreach(${symbol_dollar}user in ${symbol_dollar}pageList)
+     <tr>
+       <td>${symbol_dollar}user.userId</td>
+       <td>${symbol_dollar}user.userName</td>
+       <td>${symbol_pound}if(${symbol_dollar}user.gender=="M") 男 ${symbol_pound}else 女 ${symbol_pound}end</td>
+       <td>${symbol_dollar}user.age</td>
+       <td>
+           <a href="${symbol_dollar}{link.getContextPath()}/user/show.htm?userId=${symbol_dollar}user.userId" class="glyphicon glyphicon-info-sign" title="查看"></a> &nbsp;
+           <a href="${symbol_dollar}{link.getContextPath()}/user/edit.htm?userId=${symbol_dollar}user.userId" class="glyphicon glyphicon-edit" title="修改"></a> &nbsp;
+           <a href="javascript:deleteRecord('${symbol_dollar}user.userId');" class="glyphicon glyphicon-remove-sign" title="删除"></a>
+       </td>
+     </tr> 
+    ${symbol_pound}end
+   </table>
+   <!--分页-->
+   <div class="row text-right">
+      <div class="col-md-8 col-xs-4" style="margin:20px 0"><small>共: [ ${symbol_dollar}pageList.paginator.totalCount 记录 / ${symbol_dollar}pageList.paginator.totalPages 页 ]</small></div>     
+      <div class="col-md-4 col-xs-8">
+       <!--通过分页js产生的内容,将会插入下面的容器中,bootstrap3要求是ul对象-->
+       <ul id="pagebar"><!--javascript分页脚本将会把bootstrap样式的页码内容插入该处. 也可以通过java的paginator对象构造自己的页码--></ul>
+       <!--
+         ------Begin 另外一种分页样例--自定义构造--------
+        <ul class="pagination pagination-sm">
+        ${symbol_pound}if(${symbol_dollar}pageList.paginator.firstPage)
+          <li class="disabled"><a href="${symbol_pound}">&laquo;</a></li>
+        ${symbol_pound}else
+          <li><a href="javascript:goToPage(1,${symbol_dollar}pageList.paginator.limit,'queryForm');">&laquo;</a></li>
+        ${symbol_pound}end
+        ${symbol_pound}foreach(${symbol_dollar}p in ${symbol_dollar}pageList.paginator.slider)
+           ${symbol_pound}if(${symbol_dollar}p==${symbol_dollar}pageList.paginator.page)
+            <li class="active" ><a href="${symbol_pound}">${symbol_dollar}p<span class="sr-only">${symbol_dollar}p</span></a></li>
+           ${symbol_pound}else
+            <li><a href="javascript:goToPage(${symbol_dollar}p,${symbol_dollar}pageList.paginator.limit,'queryForm');">${symbol_dollar}p</a></li>
+           ${symbol_pound}end
+        ${symbol_pound}end
+        ${symbol_pound}if(${symbol_dollar}pageList.paginator.lastPage)
+           <li class="disabled"><a href="${symbol_pound}">&raquo;</a></li>
+         ${symbol_pound}else
+           <li><a href="javascript:goToPage(${symbol_dollar}pageList.paginator.totalPages,${symbol_dollar}pageList.paginator.limit,'queryForm');">&raquo;</a></li>
+        ${symbol_pound}end
+      </ul>
+       ------End 另外一种分页样例--自定义构造--------
+      -->
+       
+     </div>
+   </div>
+  </div>
+</div>
+
+ <!--定义本页面使用的javascript变量,传递到layout页面底部 -->
+    
+     ${symbol_pound}define(${symbol_dollar}script) 
+     <script type="text/javascript"  src="${symbol_dollar}{link.getContextPath()}/js/bootbox.min.js"></script>
+     <script type="text/javascript"  src="${symbol_dollar}{link.getContextPath()}/js/bootstrap-paginator.min.js"></script>
+     <script type="text/javascript">
+     ${symbol_pound}[[
+       function deleteRecord(uid){
+        bootbox.confirm("<span class='glyphicon glyphicon-exclamation-sign' style='color:${symbol_pound}d9534f;font-size:150%'>&nbsp;</span>你确定要删除该记录["+uid+"]?", function(result) {
+             if(result==true){
+              ${symbol_dollar}.ajax({
+		           type: "POST",
+		            url: "delete.htm",
+		          async: false,
+		       dataType: "json",
+		           data: { userId:uid },
+		        success: function(result){
+			           //更改成功
+		                if(result.success==true){
+		                  bootbox.alert("记录["+uid+"]已成功删除!",function(){
+		                          location.reload();
+		                    });
+		                  
+		    	        }else{
+		    	          bootbox.alert("记录["+uid+"]删除失败:"+result.message);
+		                }
+		              },
+		          error:function(XMLHttpRequest, textStatus, errorThrown){
+			           bootbox.alert("系统异常:"+XMLHttpRequest.statusText);
+		            }
+               });
+             }
+        }); 
+       }
+       
+       //查询条件隐藏
+        ${symbol_dollar}().ready(function(){
+           ${symbol_dollar}("${symbol_pound}div-query-head").bind("click", function(){
+              ${symbol_dollar}("${symbol_pound}div-query-body").toggle();
+              ${symbol_dollar}("${symbol_pound}div-query-head span").toggleClass("caret");
+           });
+      ]]${symbol_pound}
+           
+           //分页脚本
+            var options = {
+                bootstrapMajorVersion:3,
+                currentPage: ${symbol_dollar}pageList.paginator.page,
+                totalPages: ${symbol_dollar}pageList.paginator.totalPages,
+                numberOfPages:7,
+                size:"small",
+                onPageClicked: function(e,originalEvent,type,page){
+                   //该方法存在于my.js中,将分页信息添加到查询表单中提交.
+                   goToPage(page,${symbol_dollar}pageList.paginator.limit,"queryForm");
+                 }
+     ${symbol_pound}[[          
+             };
+            ${symbol_dollar}("${symbol_pound}pagebar").bootstrapPaginator(options);
+           
+         });
+     ]]${symbol_pound}
+     </script>
+     ${symbol_pound}end     

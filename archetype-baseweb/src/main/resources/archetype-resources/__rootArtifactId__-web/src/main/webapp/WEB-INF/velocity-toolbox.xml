@@ -1,0 +1,35 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox> 
+	<tool>
+		<key>number</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.NumberTool</class>
+	</tool>
+	<tool>
+		<key>math</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.MathTool</class>
+	</tool>
+	<tool>
+	    <key>date</key>
+	    <scope>application</scope>
+	    <class>org.apache.velocity.tools.generic.ComparisonDateTool</class>
+	    <parameter name="format" value="yyyy-MM-dd"/>
+	    <parameter name="depth" value="2"/>
+	    <parameter name="skip" value="month"/>
+	</tool>
+	<!-- webapp contextPath -->
+    <tool>
+        <key>link</key>
+        <scope>request</scope>
+        <class>org.apache.velocity.tools.view.tools.LinkTool</class>
+    </tool>
+    <tool>
+        <key>stringUtils</key>
+        <scope>request</scope>
+        <class>org.apache.velocity.util.StringUtils</class>
+    </tool>
+</toolbox>

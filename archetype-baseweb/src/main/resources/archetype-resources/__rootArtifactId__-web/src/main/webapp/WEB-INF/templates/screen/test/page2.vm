@@ -1,0 +1,7 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+${symbol_pound}set( ${symbol_dollar}layout = "layout/default_leftmenu.vm" )
+${symbol_pound}set(${symbol_dollar}page_title="非默认Layout - ${appName}")
+
+<p>该页面使用了非默认Layout模板</p>

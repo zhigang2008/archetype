@@ -1,0 +1,138 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+${symbol_pound}set(${symbol_dollar}page_title="添加用户 - ${appName}")
+
+ <!--警告框-->
+ <div id="msgdiv" class="alert alert-warning  fade in hidden" role="alert">
+ </div> 
+        
+<div class="panel panel-info">
+  <div class="panel-heading">添加用户</div>
+  <div class="panel-body">
+  <form  id="form1" class="form-horizontal" role="form" method="post">
+  <div class="form-group">
+    <label for="userId" class="col-sm-2 control-label">用户ID:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="userId" name="userId" placeholder="请输入用户ID">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="userName" class="col-sm-2 control-label">真实姓名:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入真实姓名">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="gender" class="col-sm-2 control-label">性别:</label>
+    <div class="col-sm-6">
+      <label class="radio-inline">
+        <input type="radio" name="gender" id="gender1" value="M" checked> 男
+      </label>
+      <label class="radio-inline">
+         <input type="radio" name="gender" id="gender2" value="F"> 女
+      </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="age" class="col-sm-2 control-label">年龄:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="age" name="age" placeholder="">
+    </div>
+  </div>
+   <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+       <button type="submit" class="btn btn-success">提 交</button>
+    </div>   
+  </form>
+  </div>
+</div>
+
+  <!--定义本页面使用的javascript变量,传递到layout页面底部 -->
+    
+     ${symbol_pound}define(${symbol_dollar}script) 
+     <script type="text/javascript"  src="${symbol_dollar}{link.getContextPath()}/js/jquery.validate.js"></script>
+     <script type="text/javascript"  src="${symbol_dollar}{link.getContextPath()}/js/jquery.validate.bootstrap.js"></script>
+     <script type="text/javascript"  src="${symbol_dollar}{link.getContextPath()}/js/jquery.form.min.js"></script>
+     <script type="text/javascript">
+     ${symbol_pound}[[
+       ${symbol_dollar}().ready(function (){ 
+       
+     	 ${symbol_dollar}("${symbol_pound}form1").validate({
+           submitHandler: function(form){
+                    ${symbol_dollar}(form).ajaxSubmit({
+                        type: 'post', 
+                        dataType:"json", //数据类型 
+                        url: "save.htm" ,  
+                        success: function(data){ 
+                          if(data.success){
+                             ${symbol_dollar}("${symbol_pound}msgdiv").html("成功添加!");
+                             ${symbol_dollar}("${symbol_pound}msgdiv").removeClass("alert-warning");
+                             ${symbol_dollar}("${symbol_pound}msgdiv").removeClass("hidden");
+                             ${symbol_dollar}("${symbol_pound}msgdiv").addClass("alert-success");
+                             ${symbol_dollar}("${symbol_pound}msgdiv").hide(); 
+                             ${symbol_dollar}("${symbol_pound}msgdiv").fadeIn("slow","linear");
+                            }else{
+                             ${symbol_dollar}("${symbol_pound}msgdiv").html("操作失败:"+data.message);
+                             ${symbol_dollar}("${symbol_pound}msgdiv").removeClass("alert-success");
+                             ${symbol_dollar}("${symbol_pound}msgdiv").removeClass("hidden");
+                             ${symbol_dollar}("${symbol_pound}msgdiv").addClass("alert-warning"); 
+                             ${symbol_dollar}("${symbol_pound}msgdiv").hide();  
+                             ${symbol_dollar}("${symbol_pound}msgdiv").fadeIn("slow","linear");
+                            }
+                         },  
+                         error: function(XmlHttpRequest, textStatus, errorThrown){  
+                             ${symbol_dollar}("${symbol_pound}msgdiv").html("系统错误:"+textStatus);
+                             ${symbol_dollar}("${symbol_pound}msgdiv").removeClass("alert-success");
+                             ${symbol_dollar}("${symbol_pound}msgdiv").removeClass("hidden");
+                             ${symbol_dollar}("${symbol_pound}msgdiv").addClass("alert-warning"); 
+                             ${symbol_dollar}("${symbol_pound}msgdiv").hide(); 
+                             ${symbol_dollar}("${symbol_pound}msgdiv").fadeIn("slow","linear");
+                         }  
+                       });
+                 },
+           rules: {
+             userId: {
+                required: true,
+                maxlength: 20,
+                remote: {
+                 url: "notExist.htm",
+                 type:"post",
+                 data: {
+                    userId: function() { 
+                         return ${symbol_dollar}("${symbol_pound}userId").val();
+                         }
+                     }
+                 }
+             },
+             userName: {
+                maxlength: 20,
+                required: true
+            },
+             age: {
+                required: true,
+                range:[0,150] 
+            }
+           },
+			messages: {
+			 userId: {
+                required: "必须输入ID",
+                maxlength:"最大长度20",
+                remote:"该ID已经存在"
+             },
+             userName: {
+                maxlength: "最大长度20",
+                required: "必须提供真实姓名"
+            },
+             age: {
+                required: "请输入年龄",
+                range: "年龄应在0-150之间" 
+            }
+		   }
+		 });
+		 	
+        });
+     ]]${symbol_pound}
+     </script>
+     ${symbol_pound}end     
+

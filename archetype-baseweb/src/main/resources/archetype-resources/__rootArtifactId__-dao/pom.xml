@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>${groupId}</groupId>
+    <artifactId>${rootArtifactId}-parent</artifactId>
+    <version>${version}</version>
+  </parent>
+  <artifactId>${rootArtifactId}-dao</artifactId>
+  <name>${rootArtifactId}-dao</name>
+  <description>数据访问层模块</description>
+  
+  <dependencies>
+       <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+       <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>${project.groupId}</groupId>
+        	<artifactId>${rootArtifactId}-model</artifactId>
+        	<version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+			<groupId>com.oracle</groupId> 
+  			<artifactId>ojdbc6</artifactId> 
+		</dependency>
+		<dependency>
+  		    <groupId>com.htffund.etrade.sdk</groupId>
+  		    <artifactId>sdk-base</artifactId>
+  	    </dependency>
+  	    <!-- begin 开发测试阶段使用,生产环境请移除  log4jdbc for jdk1.6  -->
+        <dependency>
+            <groupId>org.bgee.log4jdbc-log4j2</groupId>
+            <artifactId>log4jdbc-log4j2-jdbc3</artifactId>
+        </dependency>
+        <dependency>
+	        <groupId>commons-dbcp</groupId>
+	        <artifactId>commons-dbcp</artifactId>
+        </dependency>
+        <!-- end 开发测试阶段使用 ,生产环境请移除 -->
+  </dependencies>
+</project>

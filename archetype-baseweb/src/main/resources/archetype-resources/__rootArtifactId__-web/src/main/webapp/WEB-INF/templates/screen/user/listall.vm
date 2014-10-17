@@ -1,0 +1,78 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+${symbol_pound}set(${symbol_dollar}page_title="用户列表样例 - ${appName}")
+<div class="alert alert-success" role="alert">
+  本样例采用了传统的URL样式,restful方式请自行参照Spring MVC用户手册
+</div>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-md-10">样例列表</div>
+      <div class="col-md-2 text-right"><a href="${symbol_dollar}{link.getContextPath()}/user/add.htm" class="btn btn-primary btn-sm "><span class="glyphicon glyphicon-plus-sign"> </span>添加</a></div>
+    </div>
+  </div>
+  <div class="panel-body">
+      
+   <table class="table table-hover">
+    <tr>
+      <th>ID</th>
+      <th>姓名</th>
+      <th>性别</th>
+      <th>年龄</th>
+      <th>操作</th>
+    </tr>
+    ${symbol_pound}foreach(${symbol_dollar}user in ${symbol_dollar}userList)
+     <tr>
+       <td>${symbol_dollar}user.userId</td>
+       <td>${symbol_dollar}user.userName</td>
+       <td>${symbol_pound}if(${symbol_dollar}user.gender=="M") 男 ${symbol_pound}else 女 ${symbol_pound}end</td>
+       <td>${symbol_dollar}user.age</td>
+       <td>
+           <a href="${symbol_dollar}{link.getContextPath()}/user/show.htm?userId=${symbol_dollar}user.userId" class="glyphicon glyphicon-info-sign" title="查看"></a> &nbsp;
+           <a href="${symbol_dollar}{link.getContextPath()}/user/edit.htm?userId=${symbol_dollar}user.userId" class="glyphicon glyphicon-edit" title="修改"></a> &nbsp;
+           <a href="javascript:deleteRecord('${symbol_dollar}user.userId');" class="glyphicon glyphicon-remove-sign" title="删除"></a>
+       </td>
+     </tr> 
+    ${symbol_pound}end
+   </table>
+  </div>
+</div>
+
+ <!--定义本页面使用的javascript变量,传递到layout页面底部 -->
+    
+   
+     ${symbol_pound}define(${symbol_dollar}script) 
+     <script type="text/javascript"  src="${symbol_dollar}{link.getContextPath()}/js/bootbox.min.js"></script>
+     <script type="text/javascript">
+     ${symbol_pound}[[
+       function deleteRecord(uid){
+        bootbox.confirm("<span class='glyphicon glyphicon-exclamation-sign' style='color:${symbol_pound}d9534f;font-size:150%'>&nbsp;</span>你确定要删除该记录["+uid+"]?", function(result) {
+             if(result==true){
+              ${symbol_dollar}.ajax({
+		           type: "POST",
+		            url: "delete.htm",
+		          async: false,
+		       dataType: "json",
+		           data: { userId:uid },
+		        success: function(result){
+			           //更改成功
+		                if(result.success==true){
+		                  bootbox.alert("记录["+uid+"]已成功删除!",function(){
+		                          location.reload();
+		                    });
+		                  
+		    	        }else{
+		    	          bootbox.alert("记录["+uid+"]删除失败:"+result.message);
+		                }
+		              },
+		          error:function(XMLHttpRequest, textStatus, errorThrown){
+			           bootbox.alert("系统异常:"+XMLHttpRequest.statusText);
+		            }
+               });
+             }
+        }); 
+       }
+     ]]${symbol_pound}
+     </script>
+     ${symbol_pound}end     

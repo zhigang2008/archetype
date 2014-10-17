@@ -1,0 +1,36 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+${symbol_pound}${symbol_pound}分页功能
+${symbol_pound}*
+ * 分页控件
+ * @param page  
+ *	 使用com.fund99.etrading.vip.common.Pagination的对象
+ *
+ *
+*${symbol_pound}
+${symbol_pound}macro(ajaxPage ${symbol_dollar}page, ${symbol_dollar}callBackURL)
+    ${symbol_pound}if (${symbol_dollar}!page.totalSize > ${symbol_dollar}!page.pageSize) 
+        <style>
+        .active_page{
+        	color:${symbol_pound}FF0000 !important;
+        }
+        </style>
+        <div class="pagination tsPage" callBack="${symbol_dollar}!callBackURL">
+        	
+        	<a class="up previous_link" onclick="previous(this);" href="javascript:void(0);">上一页</a>
+        	
+        	${symbol_pound}foreach(${symbol_dollar}pageNum in ${symbol_dollar}!page.PageNumList)
+        		<a class="pagelink" onclick="goToPage(this, ${symbol_dollar}!pageNum)" href="javascript:void(0);">${symbol_dollar}!pageNum</a>
+        	${symbol_pound}end
+        	
+            <a class="down next_link" req="hotPage" onclick="next(this);" href="javascript:void(0);">下一页</a>
+        	
+			<span class="pageComp">共${symbol_dollar}!page.totalPageNum页</span>
+            <span>跳到</span>
+            <input class="inputpage" type="text" name="jump">
+            <span>页</span>
+            <button class="okbtn" style="cursor:pointer">确定</button>
+        </div>
+       ${symbol_pound}end
+${symbol_pound}end

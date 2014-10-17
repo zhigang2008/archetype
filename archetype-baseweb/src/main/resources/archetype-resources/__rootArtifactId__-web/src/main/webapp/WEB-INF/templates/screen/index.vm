@@ -1,0 +1,66 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+${symbol_pound}set(${symbol_dollar}page_title="首页-${appName}")
+ <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <p>Welcome!</p>
+        <h2>恭喜你,Demo工程已可以正常启动</h2>
+        <p>该demo采用了bootstrap样式,你可能会使用到......</p>
+        
+        <!--模态框-->
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="${symbol_pound}myModal"> 模态框        </button>
+           <div id="myModal" class="modal fade">
+           <div class="modal-dialog">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                 <h4 class="modal-title">窗口标题</h4>
+               </div>
+               <div class="modal-body">
+                 <p>hello, 请在这里写内容&hellip;</p>
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                 <button type="button" class="btn btn-primary">Save</button>
+               </div>
+             </div><!-- /.modal-content -->
+           </div><!-- /.modal-dialog -->
+         </div><!-- /.modal -->
+         
+         <p></p>
+
+         <!--提示信息-->
+         <div class="bs-example" style="padding-bottom: 24px;">
+         	<button type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+          <button type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+          <button type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+          <button type="button" class="btn btn-default tooltips" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+        </div>
+        <!--弹出框-->
+         <div class="bs-example" style="padding-bottom: 24px;">
+          <button id="poppver" type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="提示内容,你可以多写点 ...sfdsfsd      are 有 ok">点击显示弹出框</button>
+        </div>
+        
+       <!--警告框-->
+     	<div class="alert alert-warning alert-dismissible fade in" role="alert">
+         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+         <strong>警告框!</strong> 可以关闭
+        </div>  
+
+      </div> <!-- /jumbotron-->
+ 
+     <!--定义本页面使用的javascript变量,传递到layout页面底部 -->
+     ${symbol_pound}define(${symbol_dollar}script) 
+     ${symbol_pound}[[
+      <script type="text/javascript">
+      
+       ${symbol_dollar}(document).ready(function (){ 
+     	   ${symbol_dollar}("${symbol_pound}poppver").popover();
+     	   ${symbol_dollar}(".tooltips").tooltip();
+        });
+        
+      </script>
+     ]]${symbol_pound}
+     ${symbol_pound}end     
+ 

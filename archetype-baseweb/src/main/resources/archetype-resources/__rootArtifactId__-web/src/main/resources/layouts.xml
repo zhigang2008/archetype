@@ -1,0 +1,16 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<layouts defaultdir="/WEB-INF/templates/">
+	<excludes>
+		<pattern>/static/**</pattern>
+		<pattern>/api/**</pattern>
+		<pattern>/js/**/</pattern>
+		<pattern>/css/**/</pattern>
+		<pattern>/**/*.ajax</pattern>
+	</excludes>
+	<layout page="layout/default_nomenu.vm">
+		<pattern>/**/nomenupages/**</pattern>
+	</layout>
+</layouts>

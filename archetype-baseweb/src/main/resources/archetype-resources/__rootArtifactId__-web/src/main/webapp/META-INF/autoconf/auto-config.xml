@@ -1,0 +1,30 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <group>
+     	<!-- 开发环境：8680；UAT：7680 -->
+     	<property name="cos.ssoLoginUrl" defaultValue="http://passport.99fund.com.cn:8680/login/passPortLogin.jsp " description="当没有登录时，跳转到此地址进行登录" />
+     	<property name="cos.ssoServiceUrl" defaultValue="http://172.16.8.99:10111/passport" description="sso服务器地址，进行相应的登录状态认证" />
+     	<property name="cos.cookieSsoKey" defaultValue="ec_custid" description="cookie名称" />
+     	<property name="cos.ssoCharSet" defaultValue="UTF-8" description="用来向sso服务器发送HTTP请求的字符集" />
+		
+		<!-- 开发环境：8677；UAT：7677 -->
+		<property name="cos.tradedomain" defaultValue="http://trade.99fund.com.cn:8677/vip/" description="主站域名" />
+		
+		<!-- 开发环境：8099；UAT：8099 -->
+		<property name="cos.vipdomain" defaultValue="http://trade.99fund.com.cn:8099/vip/" description="高端理财" />
+		
+		<!-- 忘记密码链接，开发环境： UAT:7677 -->
+		<!-- <property name="cos.findpassword"  defaultValue="http://trade.99fund.com.cn:7677" description="忘记交易密码" /> -->
+		
+		<!-- 信用卡还款链接，开发环境： UAT:9101 -->
+		<property name="cos.cardRepay"  defaultValue="http://trade.99fund.com.cn:9101/credit" description="信用卡还款" />
+		<property name="cos.addBankCard"  defaultValue="http://trade.99fund.com.cn:7677" description="添加银行卡" />
+    </group>
+    <script>
+        <generate template="WEB-INF/classes/spring/spring-cos-web.xml" />
+		<generate template="WEB-INF/cos-servlet.xml" />
+    </script>
+</config>

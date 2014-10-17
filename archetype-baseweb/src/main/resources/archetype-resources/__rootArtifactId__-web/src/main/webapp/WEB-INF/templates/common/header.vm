@@ -1,0 +1,42 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+    <!--导航菜单  Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="${symbol_pound}">${appName}</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="${symbol_dollar}{link.getContextPath()}/index.htm" class="glyphicon glyphicon-home">首页</a></li>
+            <li><a href="${symbol_dollar}{link.getContextPath()}/test/page1.htm" class="glyphicon glyphicon-leaf">菜单一</a></li>
+            <li><a href="${symbol_dollar}{link.getContextPath()}/test/page2.htm" class="glyphicon glyphicon-wrench" >菜单二</a></li>
+            <li class="dropdown">
+              <a href="${symbol_pound}" class="dropdown-toggle glyphicon glyphicon-eye-open" data-toggle="dropdown">CRUD Demo <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="${symbol_dollar}{link.getContextPath()}/user/list.htm" class="glyphicon glyphicon-list">&nbsp;用户列表</a></li>
+                <li><a href="${symbol_dollar}{link.getContextPath()}/user/show.htm?userId=test" class="glyphicon glyphicon-info-sign">&nbsp;展示用户</a></li>
+                <li><a href="${symbol_dollar}{link.getContextPath()}/user/add.htm" class="glyphicon glyphicon-plus-sign">&nbsp;添加用户</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="${symbol_pound}">Separated link</a></li>
+                <li><a href="${symbol_pound}">One more separated link</a></li>
+                <li><a href="${symbol_pound}">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="${symbol_pound}" ><span class="glyphicon glyphicon-user">个人信息</span></a></li>
+            <li><a href="${symbol_pound}"><span class="glyphicon glyphicon-cog">设置</span></a></li>
+            <li><a href="${symbol_pound}"><span class="glyphicon glyphicon-log-out">登出</span></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>

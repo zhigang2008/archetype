@@ -1,0 +1,14 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <group>
+        <property name="app.name" description="应用名称" defaultValue="APP_DEMO" />
+        <property name="dubbo.registry.address" description="注册中心地址" defaultValue="zookeeper://10.50.115.40:2181?backup=10.50.115.41:2181,10.50.115.42:2181" />
+        <property name="dubbo.version" description="版本" defaultValue="1.0.0" />
+    </group>
+    <script>
+        <generate template="spring/remote-consumer.xml" />
+    </script>
+</config>

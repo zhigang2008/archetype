@@ -1,0 +1,117 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:mvc="http://www.springframework.org/schema/mvc"
+     xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	
+	<context:property-placeholder ignore-resource-not-found="false"  location="classpath*:*.properties" />
+	 
+    <!-- enable component scanning (beware that this does not enable mapper scanning!) 自动扫描且只扫描@Controller-->    
+    <context:component-scan base-package="${package}.web.controller" use-default-filters="false">
+          <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+    <!-- enable autowire -->
+    <context:annotation-config />
+   
+    
+    <!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/authurl/**" />
+			<bean class="${package}.web.controller.AuthInterceptor" />
+		</mvc:interceptor>  
+	</mvc:interceptors>
+	 -->
+	 <!-- 静态文件配置 -->
+	 <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>
+	 <mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/>
+	 <mvc:resources mapping="/fonts/**" location="/fonts/" cache-period="31556926"/>
+	 
+	     
+    <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->  
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+        <property name="supportedMediaTypes">  
+            <list>  
+                <value>text/plain;charset=utf-8</value>  
+                <value>text/html;charset=utf-8</value>  
+                <value>text/json;charset=utf-8</value>  
+                <value>application/json;charset=utf-8</value>  
+            </list>  
+        </property>
+        <!-- 为json结果数据增加分页处理 -->
+         <property name="objectMapper">
+            <bean class="com.htffund.etrade.sdk.base.paginator.jackson2.PageListJsonMapper" />
+        </property>  
+    </bean>
+    <!-- 默认的mvc注解映射的支持, 取消默认设置,改为以下连个bean的手工配置
+    <mvc:annotation-driven />
+     -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />  <!-- 这个类里面你可以注册拦截器什么的 -->   
+   	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+   	    <property name="messageConverters">  
+            <list>  
+                <ref bean="mappingJacksonHttpMessageConverter" /><!-- json转换器 -->  
+            </list>  
+        </property>  
+   	</bean>
+	
+   	<!-- velocity 模板配置 -->
+	<bean id="velocityConfig"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/templates" />
+		<property name="configLocation" value="classpath:velocity.properties" />
+	</bean>
+	
+	<bean id="viewResolver"	class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+		<property name="cache" value="true"/>
+		<property name="prefix" value="/screen/" />              <!-- 相对于 velocityConfig里的resourceLoaderPath, 即/WEB-INF/templates/screen/-->
+		<property name="suffix" value=".vm"/>                    <!-- 模板文件后缀,最终拼凑为:  /WEB-INF/templates/screen/xxx/xxx.vm -->
+        <property name="layoutUrl" value="layout/default.vm"/>   <!-- 即/WEB-INF/templates/layout/default.vm -->
+		<!-- 使用springMacro、使用servlet的对象 -->
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="exposeRequestAttributes" value="true" />
+		<property name="exposeSessionAttributes" value="true" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="allowSessionOverride" value="true"/> 
+		<property name="requestContextAttribute" value="rc"/> 
+		<!-- spring的日期格式化-->
+		<property name="dateToolAttribute" value="dateTool" />
+		<!-- 公共变量 -->
+		<property name="attributesMap">
+			<map>
+				<entry key="domain" value="/"/>
+				<entry key="jsServer" value="js"/>
+				<entry key="cssServer" value="css"/>
+				<entry key="imgServer" value="images"/>
+			</map>
+		</property>
+		<!-- velocity toolbox  -->
+		<property name="toolboxConfigLocation" value="/WEB-INF/velocity-toolbox.xml" />
+	</bean>
+
+	<!-- SpringMVC 提供的简单的异常处理,可以进行定制化, 暂时改用下面的第二种方法, 用自定义的ExceptionHandler进行异常统一管理
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+      <property name="defaultErrorView" value="error"/>        
+      <property name="exceptionAttribute" value="exception"/>  
+      <property name="exceptionMappings">  
+        <props>  
+            <prop key="com.htffund.etrade.exception.BusinessException">error-business</prop>  
+            <prop key="com.htffund.etrade.exception.ParameterException">error-parameter</prop>  
+        </props>  
+       </property>  
+    </bean>
+   -->
+   <bean id="exceptionHandler" class="${package}.web.exception.ExceptionHandler"/> 
+</beans>

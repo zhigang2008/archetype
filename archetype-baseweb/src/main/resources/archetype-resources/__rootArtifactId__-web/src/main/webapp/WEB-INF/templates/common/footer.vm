@@ -1,0 +1,23 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+    <!--footer-->
+    <div class="footer">
+      <div class="container">
+        <p class="text-muted">Copyright &copy;2014; 汇添富基金管理股份有限公司 </p>
+      </div>
+    </div>
+    
+    <!-- Placed at the end of the document so the pages load faster --> 
+    <!-- bootstrap script after jquery -->
+    <script type="text/javascript" src="${symbol_dollar}{link.getContextPath()}/js/jquery.js"></script>
+    <script type="text/javascript" src="${symbol_dollar}{link.getContextPath()}/js/bootstrap.js"></script>
+    <script type="text/javascript" src="${symbol_dollar}{link.getContextPath()}/js/my.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script type="text/javascript" async src="${symbol_dollar}{link.getContextPath()}/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" async src="${symbol_dollar}{link.getContextPath()}/js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="${symbol_dollar}{link.getContextPath()}/js/html5shiv.min.js"></script>
+      <script type="text/javascript" src="${symbol_dollar}{link.getContextPath()}/js/respond.min.js"></script>
+    <![endif]-->

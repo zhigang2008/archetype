@@ -1,0 +1,24 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<!DOCTYPE html>
+<html>
+${symbol_pound}parse("common/head.vm")
+<body>
+${symbol_pound}parse("common/header.vm")
+<div class="container-fluid">
+<div class="row">
+  <div class="col-sm-3 col-md-2 sidebar">
+  <!--左侧菜单-->
+  ${symbol_pound}parse("common/left-menu.vm")
+ </div>
+<!--右侧主屏-->
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+${symbol_dollar}screen_content
+</div>
+</div>
+</div>
+${symbol_pound}parse("common/footer.vm")
+${symbol_dollar}!{script}
+</body>
+</html>

@@ -1,0 +1,10 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<!DOCTYPE html>
+<html>
+${symbol_pound}parse("common/head.vm")
+<body>
+${symbol_dollar}screen_content
+</body>
+</html>

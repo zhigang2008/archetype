@@ -1,0 +1,40 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+${symbol_pound}set( ${symbol_dollar}layout = "layout/blank.vm" )
+${symbol_pound}set(${symbol_dollar}page_title="错误页面")
+<div class="col-md-10 col-md-offset-1">
+<h3>Sorry! 发生错误</h3>
+<div class="panel panel-danger">
+  <div class="panel-heading">Error:</div>
+  <div class="panel-body">
+    <div>${symbol_dollar}exception.getMessage()</div>
+    <div><a href="javascript:showDetail();">[详细信息]</a> -- (生产环境请取消,采用更友好的方式)</div>
+    <div id="detail" style="display:none">
+     ${symbol_pound}foreach (${symbol_dollar}i in [1..3])     
+      ${symbol_pound}if(${symbol_dollar}exception.Cause)
+           ${symbol_pound}set(${symbol_dollar}exception = ${symbol_dollar}exception.Cause)
+           ${symbol_pound}foreach(${symbol_dollar}stack in ${symbol_dollar}exception.getStackTrace())
+    	       ${symbol_dollar}stack.toString()
+           ${symbol_pound}end     
+      ${symbol_pound}end
+     ${symbol_pound}end
+    </div>
+  </div>
+</div>
+<div>
+  <button type="button" class="btn btn-primary btn-sm" onclick="javascript:location.href='${symbol_dollar}{link.getContextPath()}/index.htm'">返回首页</button>
+</div>
+</div>
+<script type="text/javascript">
+var isShow=false;
+function showDetail(){
+  if(isShow==false){
+   document.getElementById("detail").style.display = "block";
+   isShow=true;
+  }else{
+   document.getElementById("detail").style.display = "none";
+   isShow=false;
+  }
+}
+</script>
