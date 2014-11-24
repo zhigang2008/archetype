@@ -32,7 +32,7 @@
     <!-- spring context文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:/spring/spring-biz.xml,classpath*:/spring/spring-dao.xml</param-value>
+		<param-value>classpath*:/spring/spring-${rootArtifactId}-biz.xml,classpath*:/spring/spring-${rootArtifactId}-dao.xml</param-value>
 	</context-param>
 	<listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

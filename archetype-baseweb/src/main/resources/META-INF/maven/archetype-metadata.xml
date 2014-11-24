@@ -127,7 +127,7 @@
   <!--  -->
   <requiredProperties>
     <requiredProperty key="appName">
-      <defaultValue>[AppName]</defaultValue>
+     <defaultValue>[Chinese System Name]</defaultValue>
     </requiredProperty>
   </requiredProperties>
   
