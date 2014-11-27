@@ -33,6 +33,7 @@
           <directory>src/main/resources</directory>
           <includes>
             <include>spring/*.xml</include>
+             <include>META-INF/**/*.xml</include>
             <include>*.xml</include>
           </includes>
           <excludes>
