@@ -64,7 +64,14 @@
             <list>  
                 <ref bean="mappingJacksonHttpMessageConverter" /><!-- json转换器 -->  
             </list>  
-        </property>  
+        </property> 
+        <property name="webBindingInitializer">
+			<bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+				<property name="conversionService">
+					<bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean"></bean> <!-- 日期绑定 -->
+				</property>
+			</bean>
+		</property> 
    	</bean>
 	
    	<!-- velocity 模板配置 -->

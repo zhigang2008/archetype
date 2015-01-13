@@ -28,10 +28,17 @@
 <!-- 发布地址 -->
   <distributionManagement>
     <repository>
-      <id>releases</id>
+      <id>sz-nexus</id>
+	  <name>sz releases</name>
+	  <url>http://10.50.115.72:9090/nexus/content/repositories/releases</url>
+	</repository>
+	<!-- 
+	<repository>
+      <id>htf-nexus</id>
 	  <name>company releases</name>
 	  <url>http://172.16.8.10:9090/nexus/content/repositories/releases</url>
 	</repository>
+	-->
   </distributionManagement>
 
   <description>HTF BASE WEB ARCHETYPE</description>
