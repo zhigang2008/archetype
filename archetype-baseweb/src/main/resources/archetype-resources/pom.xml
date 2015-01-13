@@ -11,7 +11,8 @@
   <properties>
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  	<springframework.version>4.1.0.RELEASE</springframework.version>
+  	<!-- <springframework.version>4.1.0.RELEASE</springframework.version> -->
+  	<springframework.version>3.2.5.RELEASE</springframework.version>
   	<jackson.version>2.4.0</jackson.version>
   	<velocity.version>1.7E</velocity.version>
   	<mybatis.spring.version>1.1.0</mybatis.spring.version>

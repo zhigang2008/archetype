@@ -141,8 +141,14 @@
   </reporting>
   <!-- 发布地址 -->
   <distributionManagement>
-    <repository>
-      <id>snapshots</id>
+   <!--  <repository>
+      <id>sz-snapshots</id>
+	  <name>company snapshots</name>
+	  <url>http://10.50.115.72:9090/nexus/content/repositories/snapshots/</url>
+	</repository>
+	 -->
+	<repository>
+      <id>htf-snapshots</id>
 	  <name>company snapshots</name>
 	  <url>http://172.16.8.10:9090/nexus/content/repositories/snapshots/</url>
 	</repository>
