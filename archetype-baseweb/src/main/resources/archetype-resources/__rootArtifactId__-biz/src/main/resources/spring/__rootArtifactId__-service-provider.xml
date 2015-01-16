@@ -23,7 +23,7 @@
  	<dubbo:monitor protocol="registry"/> 
 
 	<!-- 声明需要暴露的服务接口 -->
-	<dubbo:service interface="${package}.service.UserService" ref="demoService" />
+	<dubbo:service interface="${package}.service.UserService" ref="demoService" version="${symbol_dollar}{dubbo.version}"/>
 
 	<!-- 和本地bean一样实现服务 -->
 	<bean id="demoService" class="${package}.service.impl.UserServiceImpl" />
