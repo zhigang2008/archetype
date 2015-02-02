@@ -4,7 +4,7 @@
 
   <groupId>com.htffund.etrade.archetypes</groupId>
   <artifactId>htf-archetype-baseweb</artifactId>
-  <version>1.0.1-RELEASE</version>
+  <version>1.0.3-RELEASE</version>
   <packaging>maven-archetype</packaging>
   <name>archetype-baseweb</name>
 
@@ -27,12 +27,7 @@
   </build>
 <!-- 发布地址 -->
   <distributionManagement>
-    <!-- <repository>
-      <id>sz-nexus</id>
-	  <name>sz releases</name>
-	  <url>http://10.50.115.72:9090/nexus/content/repositories/releases</url>
-	</repository>
-	-->
+
 	<repository>
       <id>htf-nexus</id>
 	  <name>company releases</name>
