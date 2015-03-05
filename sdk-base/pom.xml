@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.htffund.etrade.sdk</groupId>
 	<artifactId>sdk-base</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<name>base arch</name>
 	<description>框架基础的工具类</description>
 	<!-- 系统基础参数.公共变量-->
@@ -42,7 +42,7 @@
 		<dependency>
 	        <groupId>commons-codec</groupId>
 	        <artifactId>commons-codec</artifactId>
-	         <version>1.9</version>
+	         <version>1.3</version>
         </dependency>
 		<dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -146,16 +146,16 @@
   </reporting>
   <!-- 发布地址 -->
   <distributionManagement>
-   <repository>
+    <repository>
       <id>sz-nexus</id>
 	  <name>company snapshots</name>
 	  <url>http://10.50.115.72:9090/nexus/content/repositories/snapshots/</url>
-	</repository>
+	</repository> 
 
-	<!-- <repository>
+	<!--  <repository>
       <id>htf-nexus</id>
 	  <name>company snapshots</name>
 	  <url>http://172.16.8.10:9090/nexus/content/repositories/snapshots/</url>
-	</repository> -->
+	</repository>  -->
   </distributionManagement>
 </project>
