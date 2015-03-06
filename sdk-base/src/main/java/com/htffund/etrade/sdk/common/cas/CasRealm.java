@@ -180,7 +180,7 @@ public class CasRealm extends AuthorizingRealm {
      * @param s the input string
      * @return the list of not empty and trimmed strings
      */
-    private List<String> split(String s) {
+    protected List<String> split(String s) {
         List<String> list = new ArrayList<String>();
         String[] elements = StringUtils.split(s, ',');
         if (elements != null && elements.length > 0) {
@@ -199,7 +199,7 @@ public class CasRealm extends AuthorizingRealm {
      * @param simpleAuthorizationInfo
      * @param roles the list of roles to add
      */
-    private void addRoles(SimpleAuthorizationInfo simpleAuthorizationInfo, List<String> roles) {
+    protected void addRoles(SimpleAuthorizationInfo simpleAuthorizationInfo, List<String> roles) {
         for (String role : roles) {
             simpleAuthorizationInfo.addRole(role);
         }
@@ -211,7 +211,7 @@ public class CasRealm extends AuthorizingRealm {
      * @param simpleAuthorizationInfo
      * @param permissions the list of permissions to add
      */
-    private void addPermissions(SimpleAuthorizationInfo simpleAuthorizationInfo, List<String> permissions) {
+    protected void addPermissions(SimpleAuthorizationInfo simpleAuthorizationInfo, List<String> permissions) {
         for (String permission : permissions) {
             simpleAuthorizationInfo.addStringPermission(permission);
         }

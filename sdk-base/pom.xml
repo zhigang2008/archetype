@@ -190,10 +190,10 @@
 	  <url>http://10.50.115.72:9090/nexus/content/repositories/snapshots/</url>
 	</repository>  -->
 
-	  <repository>
+	 <repository>
       <id>htf-nexus</id>
 	  <name>company snapshots</name>
 	  <url>http://172.16.8.10:9090/nexus/content/repositories/snapshots/</url>
-	</repository>  
+	</repository> 
   </distributionManagement>
 </project>
