@@ -1,23 +1,21 @@
 package com.htffund.etrade.sdk.common.shiro;
 
-import java.beans.BeanInfo;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.velocity.tools.Scope;
 import org.apache.velocity.tools.config.DefaultKey;
 import org.apache.velocity.tools.config.ValidScope;
 
 
-/**
- * Velocity 模板引擎，Shiro 权限标签
- * 
- * @author Yong.Teng <webmaster@buession.com>
+/**Velocity 中支持shiro标签
+ * @author Steven
+ * @version 1.0.3
+ * @since 1.0.3
  */
 @DefaultKey("shiro")
 @ValidScope(Scope.APPLICATION)
@@ -25,8 +23,6 @@ public class ShiroVelocitySupport {
 
 	private static final String ROLE_NAMES_DELIMETER = ",";
 	private static final String PERMISSION_NAMES_DELIMETER = ",";
-
-	private static final Logger logger = LogManager.getLogger(ShiroVelocitySupport.class);
 
 	/**
 	 * 验证是否为已认证通过的用户，不包含已记住的用户，这是与 isUser 标签方法的区别所在。
@@ -85,29 +81,19 @@ public class ShiroVelocitySupport {
 	 *        属性名称
 	 * @return 用户属性
 	 */
+	@SuppressWarnings("unchecked")
 	public Object getPrincipalProperty(String property) {
 		Subject subject = SecurityUtils.getSubject();
 
 		if (subject != null) {
-			Object principal = subject.getPrincipal();
-
-			try {
-				BeanInfo bi = Introspector.getBeanInfo(principal.getClass());
-
-				for (PropertyDescriptor pd : bi.getPropertyDescriptors()) {
-					if (pd.getName().equals(property) == true) {
-						return pd.getReadMethod().invoke(principal, (Object[]) null);
-					}
-				}
-
-				logger.trace("Property ["+property+"] not found in principal of type ["+principal.getClass().getName()+"]");
-			} catch (Exception e) {
-				logger.trace("Property ["+property+"] not found in principal of type ["+principal.getClass().getName()+"]");
-			}
+			PrincipalCollection  principals = subject.getPrincipals();
+			List<Object> listPrincipals=principals.asList();
+			 Map<String, Object> attributes = (Map<String, Object>) listPrincipals.get(1);
+			return attributes.get(property);
 		}
 
 		return null;
-	}	
+	}
 
 	/**
 	 * 验证用户是否具备某角色。

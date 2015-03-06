@@ -1,5 +1,9 @@
 package com.htffund.etrade.sdk.common.cas;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,13 +18,13 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.util.CollectionUtils;
 import org.apache.shiro.util.StringUtils;
 import org.jasig.cas.client.authentication.AttributePrincipal;
-import org.jasig.cas.client.validation.*;
+import org.jasig.cas.client.validation.Assertion;
+import org.jasig.cas.client.validation.Cas20ServiceTicketValidator;
+import org.jasig.cas.client.validation.Saml11TicketValidator;
+import org.jasig.cas.client.validation.TicketValidationException;
+import org.jasig.cas.client.validation.TicketValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 
 public class CasRealm extends AuthorizingRealm {
@@ -93,7 +97,6 @@ public class CasRealm extends AuthorizingRealm {
      * @throws AuthenticationException if there is an error during authentication.
      */
     @Override
-    @SuppressWarnings("unchecked")
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         CasToken casToken = (CasToken) token;
         if (token == null) {
@@ -147,7 +150,7 @@ public class CasRealm extends AuthorizingRealm {
         // retrieve user information
         SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) principals;
         List<Object> listPrincipals = principalCollection.asList();
-        Map<String, String> attributes = (Map<String, String>) listPrincipals.get(1);
+        Map<String, Object> attributes = (Map<String, Object>) listPrincipals.get(1);
         // create simple authorization info
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         // add default roles
@@ -157,14 +160,16 @@ public class CasRealm extends AuthorizingRealm {
         // get roles from attributes
         List<String> attributeNames = split(roleAttributeNames);
         for (String attributeName : attributeNames) {
-            String value = attributes.get(attributeName);
-            addRoles(simpleAuthorizationInfo, split(value));
+        	//默认CAS Server的roles是以列表形式传递
+            List<String> roles = (List<String>)attributes.get(attributeName);
+            addRoles(simpleAuthorizationInfo, roles);
         }
         // get permissions from attributes
         attributeNames = split(permissionAttributeNames);
         for (String attributeName : attributeNames) {
-            String value = attributes.get(attributeName);
-            addPermissions(simpleAuthorizationInfo, split(value));
+        	//默认CAS权限数据是以列表方式传递
+        	List<String> permissions = (List<String>)attributes.get(attributeName);
+            addPermissions(simpleAuthorizationInfo, permissions);
         }
         return simpleAuthorizationInfo;
     }

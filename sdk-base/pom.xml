@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.htffund.etrade.sdk</groupId>
 	<artifactId>sdk-base</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.3-SNAPSHOT</version>
 	<name>base arch</name>
 	<description>框架基础的工具类</description>
 	<!-- 系统基础参数.公共变量-->
@@ -14,6 +14,8 @@
   	  <jackson.version>2.4.0</jackson.version>
   	  <log4j.version>2.0.2</log4j.version>
   	  <mybatis.spring.version>1.1.0</mybatis.spring.version>
+  	  <velocity.version>1.7</velocity.version>
+      <shiro.version>1.2.3</shiro.version>
     </properties>
 	<dependencies>
 		<dependency>
@@ -92,6 +94,42 @@
             <artifactId>log4jdbc-log4j2-jdbc3</artifactId>
             <version>1.16</version>
         </dependency>
+        <dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>${velocity.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+  		<dependency>
+           <groupId>org.apache.shiro</groupId>
+           <artifactId>shiro-core</artifactId>
+           <version>${shiro.version}</version>
+           <scope>provided</scope>
+        </dependency>
+        <dependency>
+           <groupId>org.apache.shiro</groupId>
+           <artifactId>shiro-spring</artifactId>
+           <version>${shiro.version}</version>
+           <scope>provided</scope>
+        </dependency>
+        <dependency>
+           <groupId>org.apache.shiro</groupId>
+           <artifactId>shiro-web</artifactId>
+           <version>${shiro.version}</version>
+           <scope>provided</scope>
+        </dependency>
+        <dependency>
+           <groupId>org.apache.shiro</groupId>
+           <artifactId>shiro-cas</artifactId>
+           <version>${shiro.version}</version>
+           <scope>provided</scope>
+        </dependency>
 	</dependencies>
 	<!-- 构建,共用插件管理 -->
    <build>
@@ -146,16 +184,16 @@
   </reporting>
   <!-- 发布地址 -->
   <distributionManagement>
-    <repository>
+    <!-- <repository>
       <id>sz-nexus</id>
 	  <name>company snapshots</name>
 	  <url>http://10.50.115.72:9090/nexus/content/repositories/snapshots/</url>
-	</repository> 
+	</repository>  -->
 
-	<!--  <repository>
+	  <repository>
       <id>htf-nexus</id>
 	  <name>company snapshots</name>
 	  <url>http://172.16.8.10:9090/nexus/content/repositories/snapshots/</url>
-	</repository>  -->
+	</repository>  
   </distributionManagement>
 </project>
