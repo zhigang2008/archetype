@@ -5,10 +5,10 @@
 <config>
     <group>
         <property name="${rootArtifactId}.db.driverclass" description="数据库驱动" defaultValue="oracle.jdbc.OracleDriver" />
-        <property name="${rootArtifactId}.db.url" description="数据库地址" defaultValue="jdbc:oracle:thin:@10.50.115.100:1521:HTFQC" />
+        <property name="${rootArtifactId}.db.url" description="数据库地址" defaultValue="jdbc:oracle:thin:@10.50.115.99:1521:htfds" />
         <property name="${rootArtifactId}.db.username" description="数据库用户名" defaultValue="ec" />
-        <property name="${rootArtifactId}.db.password" description="数据库用户密码" defaultValue="ec9922" />
-        <property name="${rootArtifactId}.db.jndiname" description="JNDI链接池名称" defaultValue="ec" />
+        <property name="${rootArtifactId}.db.password" description="数据库用户密码" defaultValue="password" />
+        <property name="${rootArtifactId}.db.jndiname" description="JNDI链接池名称" defaultValue="EC" />
     </group>
     <script>
         <generate template="spring/spring-${rootArtifactId}-dao.xml" />

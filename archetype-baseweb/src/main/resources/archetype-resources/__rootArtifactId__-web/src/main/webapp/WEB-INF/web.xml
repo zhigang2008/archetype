@@ -9,7 +9,7 @@
 	<display-name>${rootArtifactId}</display-name>
 	<description>${appName}</description>
 
-	<!-- log4j2  监听 -->
+	<!-- log4j2 web 监听  可以不使用
 	<context-param>
 		<param-name>log4j.configurationFile</param-name>
 		<param-value>classpath*:/log4j2.xml</param-value>
@@ -29,6 +29,7 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+    -->
     <!-- spring context文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -117,4 +118,12 @@
         <error-code>404</error-code>  
        <location>/404.htm</location>  
     </error-page>  
+    
+    <!-- JNDI DataSource for develop -->
+    <resource-ref>
+      <description>jndi</description>
+      <res-ref-name>EC</res-ref-name>
+      <res-type>javax.sql.DataSource</res-type>
+      <res-auth>Container</res-auth>
+    </resource-ref>
 </web-app>
