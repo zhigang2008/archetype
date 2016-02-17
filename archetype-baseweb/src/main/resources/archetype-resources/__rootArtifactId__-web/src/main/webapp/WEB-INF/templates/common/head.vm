@@ -12,6 +12,8 @@ ${symbol_dollar}!{head}
     <title>${symbol_dollar}!page_title</title>
     <!-- Bootstrap core CSS -->
     <link href="${symbol_dollar}{link.getContextPath()}/css/bootstrap.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="${symbol_dollar}{link.getContextPath()}/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="${symbol_dollar}{link.getContextPath()}/css/my.css" rel="stylesheet">
 </head>
