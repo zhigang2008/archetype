@@ -37,7 +37,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		    }
 		    BackResult result =new BackResult();
 		    //TODO 根据系统调整返回代码
-		    result.setErrCode(status.value());
+		    result.setErrCode(String.ValueOf(status.value()));
             result.setErrMsg(ex.getMessage());
             
 		   return new ResponseEntity<Object>(result, headers, status);
