@@ -31,7 +31,7 @@
 	<repository>
       <id>htf-nexus</id>
 	  <name>company releases</name>
-	  <url>http://172.16.8.10:9090/nexus/content/repositories/releases</url>
+	  <url>http://127.0.0.1/nexus/content/repositories/releases</url>
 	</repository>
 	
   </distributionManagement>
