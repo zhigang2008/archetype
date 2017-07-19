@@ -4,7 +4,7 @@
 
   <groupId>com.htffund.etrade.archetypes</groupId>
   <artifactId>htf-archetype-baseweb</artifactId>
-  <version>1.0.6-RELEASE</version>
+  <version>1.0.7-RELEASE</version>
   <packaging>maven-archetype</packaging>
   <name>archetype-baseweb</name>
 
